@@ -37,6 +37,11 @@ class TodoForm extends React.Component{
 			task: task
 		})
 		.then(res => {
+			let items = this.props.route.data;
+			let item = res.data;
+			item.key = item._id;
+			items.push(item);
+			this.props.route.updateListState(items);
 			this.context.router.push('/');
 		})
 		.catch(err => console.error(err));

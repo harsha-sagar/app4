@@ -1,27 +1,25 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router';
 
 class Dashboard extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            totalItems: 0,
-            completedItems: 0,
-            activeItems: 0
-        };
-    }
-    componentWillMount(){
-		this.fetchList();
-    }
 	render() {
+        let data = this.props.route.data.map(item => item);
+        let overview = {
+            totalItems: data.length,
+            completedItems: (data.filter(function(item){
+                return item.complete === true;
+            })).length,
+            activeItems: (data.filter(function(item){
+                return item.complete === false;
+            })).length
+        };
 		return (
 			<div>
                 <h1>Overview</h1>
                 <ul className="list-group">
-                    <li>Total list items: {this.state.totalItems}</li>
-                    <li>Completed items: {this.state.completedItems}</li>
-                    <li>Active items: {this.state.activeItems}</li>
+                    <li>Total list items: {overview.totalItems}</li>
+                    <li>Completed items: {overview.completedItems}</li>
+                    <li>Active items: {overview.activeItems}</li>
                 </ul>
                 <nav>
                     <Link to="/items">Open list</Link><br/>
@@ -31,22 +29,6 @@ class Dashboard extends React.Component{
                 </nav>
 			</div>
 		);
-	}
-	fetchList(){
-		axios.get('http://localhost:5000/items')
-		.then(res => {
-			res.data.forEach(item => item.key = item._id);
-			this.setState({
-                totalItems: res.data.length,
-				completedItems: (res.data.filter(function(item){
-                    return item.complete === true;
-                })).length,
-				activeItems: (res.data.filter(function(item){
-                    return item.complete === false;
-                })).length
-			});
-		})
-		.catch(err => console.error(err));
 	}
 }
 
