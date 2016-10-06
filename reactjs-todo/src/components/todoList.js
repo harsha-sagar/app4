@@ -35,7 +35,7 @@ class TodoList extends React.Component{
 			res.data.forEach(item => item.key = item._id);
 			this.updateListState(res.data);
 		})
-		.catch(err => console.log('fetchListerror', err));
+		.catch(err => console.error(err));
 	}
 	updateForComplete(nodeId, complete) {
 		axios.put('http://localhost:5000/items/'+nodeId, {
