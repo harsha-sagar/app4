@@ -13,7 +13,7 @@ class TodoForm extends React.Component{
 			<form className="form-horizontal" onSubmit={this.doSubmit}>
 				<div className="form-group">
 					<div className="col-md-10">
-						<input type="text" ref="task" className="form-control" placeholder="Add into list here..." />
+						<input type="text" ref={(c) => this._input = c} className="form-control" placeholder="Add into list here..." />
 					</div>
 					<div className="col-md-2">
 						<input type="submit" value="Add" className="btn btn-primary" />
@@ -24,12 +24,12 @@ class TodoForm extends React.Component{
 	}
 	doSubmit(e) {
 		e.preventDefault();
-		var task = ReactDOM.findDOMNode(this.refs.task).value.trim();
+		var task = ReactDOM.findDOMNode(this._input).value.trim();
 		if (!task) {
 			return;
 		}
 		this.addIntoList(task);
-		ReactDOM.findDOMNode(this.refs.task).value = '';
+		ReactDOM.findDOMNode(this._input).value = '';
 		return;
 	}
 	addIntoList(task) {
