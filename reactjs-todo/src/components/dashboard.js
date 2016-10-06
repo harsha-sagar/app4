@@ -24,9 +24,9 @@ class Dashboard extends React.Component{
                     <li>Active items: {this.state.activeItems}</li>
                 </ul>
                 <nav>
-                    <Link to={{pathname: '/items', query:{list: 'all'}}}>Open list</Link><br/>
-                    <Link to={{pathname: '/items', query:{list: 'completed'}}}>Completed list</Link><br/>
-                    <Link to={{pathname: '/items', query:{list: 'active'}}}>Active list</Link><br/>
+                    <Link to="/items">Open list</Link><br/>
+                    <Link to="/items/completed">Completed list</Link><br/>
+                    <Link to="/items/active">Active list</Link><br/>
                     <Link to="/additem">Add item</Link><br/>
                 </nav>
 			</div>

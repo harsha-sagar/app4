@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Router history={ hashHistory }>
           <Route path="/" component={Dashboard}></Route>
-          <Route path="/items" component={TodoList}></Route>
+          <Route path="/items(/:filter)" component={TodoList}></Route>
           <Route path="/additem" component={TodoForm}></Route>
       </Router>
     );

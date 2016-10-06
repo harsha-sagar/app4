@@ -6,21 +6,12 @@ class TodoList extends React.Component{
     constructor(){
         super();
         this.state = {
-            data: [],
-			listType: 'all',
-			categories: ['all','completed','active']
+            data: []
         };
         this.removeFromList = this.removeFromList.bind(this);
         this.updateForComplete = this.updateForComplete.bind(this);
     }
     componentWillMount(){
-		if(this.props.location.query.list === this.state.categories[1]){
-			this.setState({listType: this.state.categories[1]});
-		} else if(this.props.location.query.list === this.state.categories[2]){
-			this.setState({listType: this.state.categories[2]});
-		} else{
-			this.setState({listType: this.state.categories[0]});
-		}
 		this.fetchList();
     }
 	render() {
@@ -72,9 +63,9 @@ class TodoList extends React.Component{
 	}
 	updateListState(items){
 		let data = [];
-		if(this.state.listType === this.state.categories[1]){
+		if(this.props.params.filter === this.props.categories[0]){
 			data = items.filter(item => {return item.complete });
-		} else if(this.state.listType === this.state.categories[2]){
+		} else if(this.props.params.filter === this.props.categories[1]){
 			data = items.filter(item => {return !item.complete });
 		} else{
 			data = items;
@@ -83,6 +74,10 @@ class TodoList extends React.Component{
 			data: data
 		});
 	}
+}
+
+TodoList.defaultProps = {
+	categories: ['completed','active']
 }
 
 export default TodoList
