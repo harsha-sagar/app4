@@ -1,2 +1,2 @@
-### About -  
-todo app built with bifurcation of front-end and Back-end    
+### About:  
+Todo app with bifurcation of front-end & back-end using Reactjs, Expressjs, mongoDB
